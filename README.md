@@ -8,3 +8,7 @@ In this repository you will find the following tests:
 
 # Recommendation:
 Please note that to successfully run these tests, you must generate your APIKEY and configure it in the project.
+
+# Dependencies:
+To manage the environment variables, the dotenv library was installed. This can be installed with the following command:
+npm install @playwright/test dotenv
