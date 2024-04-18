@@ -1,0 +1,3 @@
+# Archivos y directorios ignorados por Git
+# Archivos de configuración
+.env
