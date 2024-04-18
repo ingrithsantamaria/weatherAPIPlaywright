@@ -1,26 +1,21 @@
-import { WeatherAPI } from '../tests/weatherTest.spec';
-import { test, expect } from '@playwright/test';
-test.describe('Weather API Tests', () => {
-  const weatherApi = new WeatherAPI();
-  test('Test 1: Ensure the API returns the current weather data for a city', async () => {
-    const response = await weatherApi.getWeatherByCityName('London');
-    expect(response.status()).toBe(200);
-    const body = JSON.parse(await response.text());
-    expect(body).toHaveProperty('weather');
-    expect(body).toHaveProperty('main');
-  });
-  test('Test 2: Confirm the API retrieves weather data using a city ID', async () => {
-    const response = await weatherApi.getWeatherByCityId('2172797');
-    expect(response.status()).toBe(200);
-    const body = JSON.parse(await response.text());
-    expect(body).toHaveProperty('weather');
-    expect(body).toHaveProperty('main');
-  });
-  test('Test 3: Test the API’s ability to return a 5-day forecast for a specified city', async () => {
-    const response = await weatherApi.getForecastByCityName('Paris');
-    expect(response.status()).toBe(200);
-    const body = JSON.parse(await response.text());
-    expect(body).toHaveProperty('list');
-    expect(body.list.length).toBeGreaterThan(0);
-  });
-});
+import { request } from '@playwright/test';
+import dotenv from 'dotenv';
+dotenv.config();
+export class WeatherAPI {
+  constructor() {
+    this.baseUrl = 'https://api.openweathermap.org/data/2.5';
+    this.apiKey = process.env.API_KEY;
+  }
+  async createContext() {
+    return await request.newContext();
+  }
+  async getWeatherByCityName(context, cityName) {
+    return await context.get(`${this.baseUrl}/weather?q=${cityName}&appid=${this.apiKey}`);
+  }
+  async getWeatherByCityId(context, cityId) {
+    return await context.get(`${this.baseUrl}/weather?id=${cityId}&appid=${this.apiKey}`);
+  }
+  async getForecastByCityName(context, cityName) {
+    return await context.get(`${this.baseUrl}/forecast?q=${cityName}&appid=${this.apiKey}`);
+  }
+}
