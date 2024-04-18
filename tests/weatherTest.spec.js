@@ -19,7 +19,6 @@ test.describe('OpenWeatherMap API Tests', () => {
   test('Confirm the API retrieves weather data using a city ID', async () => {
     const response = await weatherApi.getWeatherByCityId(context, '3563856');
     const responseBody = await response.json();
-    
     test.expect(response.status()).toBe(200);
     test.expect(responseBody).toHaveProperty('weather');
     test.expect(responseBody).toHaveProperty('main');
