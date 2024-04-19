@@ -29,5 +29,6 @@ test.describe('OpenWeatherMap API Tests', () => {
     test.expect(response.status()).toBe(200);
     test.expect(responseBody).toHaveProperty('list');
     test.expect(responseBody.list.length).toBeGreaterThan(0);
+    test.expect(response.body.list).to.have.length(40);
   });
 });
