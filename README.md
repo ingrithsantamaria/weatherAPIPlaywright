@@ -5,6 +5,9 @@ In this repository you will find the following tests:
 1. Ensure that the API correctly returns the current weather data when queried with a city name.
 2. Confirm that the API can retrieve current weather data using a city's unique ID.
 3. Test the API's ability to return a 5-day weather forecast for a specified city by name.
+4. The structure of the response by city is validated.
+5. The HTTP state is validated when the API KEY is invalid.
+6. It is validated that response times are less than 500 ms
 
 # Recommendation:
 Please note that to successfully run these tests, you must generate your APIKEY and configure it in the project.
