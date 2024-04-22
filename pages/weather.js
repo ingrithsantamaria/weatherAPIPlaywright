@@ -5,6 +5,7 @@ export class WeatherAPI {
   constructor() {
     this.baseUrl = 'https://api.openweathermap.org/data/2.5';
     this.apiKey = process.env.API_KEY;
+    this.invalidApi = 'invalidAPIKEY'
   }
   async createContext() {
     return await request.newContext();
@@ -17,5 +18,8 @@ export class WeatherAPI {
   }
   async getForecastByCityName(context, cityName) {
     return await context.get(`${this.baseUrl}/forecast?q=${cityName}&appid=${this.apiKey}`);
+  }
+  async getWeatherByCityNameInvalid(context, cityName) {
+    return await context.get(`${this.baseUrl}/forecast?q=${cityName}&appid=${this.invalidApi}`);
   }
 }

@@ -49,11 +49,8 @@ test.describe('OpenWeatherMap API Tests', () => {
     // test.expect(typeof responseBody.list[0].name).toBe('string')
   })
   test('Should handle 401 Unauthorized for invalid API key', async () => {
-    const apiKey = 'invalid_key';
-    const baseUrl = 'https://api.openweathermap.org/data/2.5'
-    const weatherApi = new WeatherAPI(baseUrl, apiKey);
-    const response = await weatherApi.getForecastByCityName(context, 'España');
+    const response = await weatherApi.getWeatherByCityNameInvalid(context, 'España');
     console.log(`Status Code: ${response.status()}`);
-    expect(response.status()).toBe(401);
+    test.expect(response.status()).toBe(401);
   })
 });
